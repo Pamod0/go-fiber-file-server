@@ -6,20 +6,6 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-// Middleware for access control
-func accessControl(c *fiber.Ctx) error {
-    // Example: Check for a simple Authorization header
-    authHeader := c.Get("Authorization")
-
-    // Dummy authorization logic (replace with real auth)
-    if authHeader != "Bearer valid-token" {
-        return c.Status(fiber.StatusUnauthorized).SendString("Unauthorized Access")
-    }
-
-    // If authorized, continue to the next middleware/handler
-    return c.Next()
-}
-
 func main() {
     // Create a new Fiber app
     app := fiber.New()
@@ -57,4 +43,19 @@ func main() {
 
     // Start the server on port 3000
     log.Fatal(app.Listen(":3000"))
+}
+
+
+// Middleware for access control
+func accessControl(c *fiber.Ctx) error {
+    // Example: Check for a simple Authorization header
+    authHeader := c.Get("Authorization")
+
+    // Dummy authorization logic (replace with real auth)
+    if authHeader != "Bearer valid-token" {
+        return c.Status(fiber.StatusUnauthorized).SendString("Unauthorized Access")
+    }
+
+    // If authorized, continue to the next middleware/handler
+    return c.Next()
 }
